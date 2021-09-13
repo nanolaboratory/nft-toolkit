@@ -16,7 +16,7 @@ class RandomImageGenerator(object):
         collection_input_path,
         collection_output_path
     ):
-        self.permutations = 10
+        self.permutations = permutations
         self.width = width
         self.height = height
         self.parts_path = collection_input_path
