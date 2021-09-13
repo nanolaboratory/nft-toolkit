@@ -1,0 +1,27 @@
+version: 2.1
+
+orbs:
+  python: circleci/python@1.2
+
+workflows:
+  Circle CI:
+    jobs:
+      - build-and-test
+jobs:
+  build-and-test:
+    docker:
+      - image: python:3.6-alpine
+    steps:
+      - checkout
+      - run:
+          name: Install deps
+          command: apk add jpeg-dev
+      - run: 
+          name: Upgrade pip
+          command: python3 -m pip install --upgrade pip
+      - run:
+          name: Run pip install
+          command: pip install -i https://test.pypi.org/simple/ nft-toolkit==0.0.1a11
+      - run:
+          name: Run tests
+          command: pytest
