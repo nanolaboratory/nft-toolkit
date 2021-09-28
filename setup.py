@@ -5,7 +5,7 @@ setuptools.setup(
     name="nft-toolkit",
     version="0.0.1a11",
     author="Nano Labs LLC",
-    author_email="nanolabsdev@gmail.com",
+    author_email="hello@nanolabs.dev",
     description="A tool to generate a randomized 2D-image NFT collection based on nft attribute layers",
     url="https://github.com/nanolaboratory/nft-toolkit",
     project_urls={
@@ -17,9 +17,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=["nft"],
-    python_requires=">=3.6",
+    python_requires=">=3.10",
     install_requires=[
-	"Pillow",
+	    "Pillow",
         "simplejson"
     ],
 )
