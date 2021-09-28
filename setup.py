@@ -17,9 +17,9 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ],
     packages=["nft"],
-    python_requires=">=3.10",
+    python_requires=">=3.6",
     install_requires=[
-	    "Pillow",
+	    "Pillow==8.3.2",
         "simplejson"
     ],
 )
