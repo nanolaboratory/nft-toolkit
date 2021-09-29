@@ -19,6 +19,9 @@ jobs:
       - run: 
           name: Upgrade pip
           command: python3 -m pip install --upgrade pip
+      - run: 
+          name: Install pytest
+          command: apt install pytest
       - run:
           name: Run pip install
           command: pip install -r requirements.txt
