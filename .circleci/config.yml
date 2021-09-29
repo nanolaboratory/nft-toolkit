@@ -19,9 +19,12 @@ jobs:
       - run: 
           name: Upgrade pip
           command: python3 -m pip install --upgrade pip
-      - run: 
-          name: Install pytest
-          command: sudo apt install pytest
+      - run:
+          name: Create venv
+          command: python3 -m venv venv
+      - run:
+          name: Enter venv
+          command: source venv/bin/activate
       - run:
           name: Run pip install
           command: pip install -r requirements.txt
