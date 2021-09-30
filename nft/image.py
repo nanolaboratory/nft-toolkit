@@ -59,9 +59,10 @@ class RandomImageGenerator(object):
 
     def image_dimensions(self, image_path):
         im = Image.open(image_path)
+        im.close()
         return im.size
 
-    def build_image_store(self):
+    def build_image_dict(self):
         image_store = OrderedDict()
         for category in self.parts_list:
             image_store.setdefault(category, [])
@@ -72,7 +73,6 @@ class RandomImageGenerator(object):
 
             for attribute in category_list:
                 attribute_image_path = "{}/{}".format(category_path, attribute)
-                attribute_image = Image.open(attribute_image_path)
                 image_store[category].append(attribute_image_path)
 
         return image_store
@@ -91,6 +91,12 @@ class RandomImageGenerator(object):
                 attribute_image = Image.open(attributes[attribute_rng])
                 attribute_name += "{}_".format(self.image_name(attribute_image))
 
+                attribute_image_h, attribute_image_w = attribute_image.size
+                if attribute_image_h != self.height and attribute_image_w != self.width:
+                    raise AssertionError("Height and/or width does not match \
+                        {0} != {1} and/or {2} != {3}.".format(attribute_image_h, \
+                            self.height, attribute_image_w, self.width))
+
                 nft_image.paste(
                     attribute_image,
                     (0, 0),
@@ -100,7 +106,7 @@ class RandomImageGenerator(object):
             nft_image.save(nft_image_path)
 
     def generate_collection(self):
-        image_store = self.build_image_store()
+        image_store = self.build_image_dict()
 
         if not os.path.exists(self.collection_output_path):
             os.makedirs(self.collection_output_path)
