@@ -30,4 +30,4 @@ jobs:
           command: pip install -r requirements.txt
       - run:
           name: Run tests
-          command: pytest
+          command: python -m pytest
