@@ -44,7 +44,8 @@ class RandomImageGenerator(object):
 
         self.modules_path = modules_path
         self.modules_list = sorted(os.listdir(self.modules_path))
-        self.modules_list = [module_title for module_title in self.modules_list if not module_title.startswith(".")]
+        self.modules_list = [module_title for module_title in \
+            self.modules_list if not module_title.startswith(".")]
         if len(self.modules_list) == 0:
             raise AssertionError("No modules")
 
@@ -54,21 +55,20 @@ class RandomImageGenerator(object):
 
     def find_first_attribute(self):
         for module in self.modules_list:
-            attribute_list = os.listdir("{}/{}".format(self.modules_path, module))
+            attribute_list = os.listdir("{}/{}".format( \
+                self.modules_path, module))
 
             for attribute in attribute_list:
                 if not attribute.startswith("."):
-                    attribute_path = "{}/{}/{}".format(self.modules_path, self.modules_list[0], attribute)
+                    attribute_path = "{}/{}/{}".format( \
+                        self.modules_path, self.modules_list[0], attribute)
                     return attribute_path
 
         raise Exception("No attributes found.")
 
     def image_dimensions(self, image_path):
-        im = Image.open(image_path)
-        height = im.height
-        width = im.width
-        im.close()
-        return height, width
+        with Image.open(image_path) as im:
+            return im.height, im.width
 
     def build_image_dict(self):
         images_paths = OrderedDict()
@@ -104,15 +104,17 @@ class RandomImageGenerator(object):
 
                     if attribute_image_h != self.height and attribute_image_w != self.width:
                         raise AssertionError("Height and/or width does not match \
-                            {0} != {1} and/or {2} != {3}.".format(attribute_image_h, \
-                                self.height, attribute_image_w, self.width))
+                            {0} != {1} and/or {2} != {3}.".format(
+                                attribute_image_h, self.height, 
+                                attribute_image_w, self.width))
 
                     nft_image.paste(
                         attribute_image,
                         (0, 0),
                         mask=attribute_image
                     )
-            nft_image_path = "{}/{}.png".format(self.collection_output_path, attribute_name[:-1])
+            nft_image_path = "{}/{}.png".format( \
+                self.collection_output_path, attribute_name[:-1])
             nft_image.save(nft_image_path)
 
     def generate_collection(self):
