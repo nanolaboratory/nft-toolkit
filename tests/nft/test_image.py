@@ -14,7 +14,7 @@ def get_image_data(image_path):
 @pytest.fixture()
 def random_image_generator():
     yield RandomImageGenerator(1, './tests/nft/test_modules/',
-        './tests/nft/output')
+                               './tests/nft/output')
 
     if os.path.isdir("./tests/nft/output/"):
         rmtree('./tests/nft/output')
@@ -58,11 +58,12 @@ def test_overlay(random_image_generator):
         assert pixdata[pix_index:pix_index + 3] == upper_left
         assert pixdata[pix_index + 12:pix_index + 15] == upper_right
         assert pixdata[pix_index + bottom_offset:
-            pix_index + bottom_offset + 3] == lower_left
+                       pix_index + bottom_offset + 3] == lower_left
 
         if row_idx != 2:
             assert pixdata[pix_index + bottom_offset + 12:
-                pix_index + bottom_offset + 15] == top_lower_right
+                           pix_index + bottom_offset + 15] == top_lower_right
         else:
             assert pixdata[pix_index + bottom_offset + 12:
-                pix_index + bottom_offset + 15] == bottom_lower_right
+                           pix_index + bottom_offset + 15] \
+                   == bottom_lower_right

@@ -43,7 +43,9 @@ class RandomImageGenerator(object):
         self.modules_path = modules_path
         self.modules_list = sorted(os.listdir(self.modules_path))
         self.modules_list = [module_title for module_title in
-                self.modules_list if not module_title.startswith(".")]
+                             self.modules_list if not
+                             module_title.startswith(".")]
+
         if len(self.modules_list) == 0:
             raise AssertionError("No modules")
 
@@ -75,8 +77,8 @@ class RandomImageGenerator(object):
 
             module_path = "{}/{}".format(self.modules_path, module)
             module_list = sorted(os.listdir(module_path))
-            module_list = [module_title for module_title 
-            in module_list if not module_title.startswith(".")]
+            module_list = [module_title for module_title in module_list
+                           if not module_title.startswith(".")]
 
             for attribute in module_list:
                 attribute_image_path = "{}/{}".format(module_path, attribute)
