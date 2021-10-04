@@ -1,9 +1,7 @@
 from random import randrange
-from PIL import Image, ImageDraw
+from PIL import Image
 from collections import OrderedDict
 
-import simplejson
-import json
 import os
 
 
@@ -44,8 +42,8 @@ class RandomImageGenerator(object):
 
         self.modules_path = modules_path
         self.modules_list = sorted(os.listdir(self.modules_path))
-        self.modules_list = [module_title for module_title in \
-            self.modules_list if not module_title.startswith(".")]
+        self.modules_list = [module_title for module_title in
+                self.modules_list if not module_title.startswith(".")]
         if len(self.modules_list) == 0:
             raise AssertionError("No modules")
 
@@ -55,12 +53,12 @@ class RandomImageGenerator(object):
 
     def find_first_attribute(self):
         for module in self.modules_list:
-            attribute_list = os.listdir("{}/{}".format( \
+            attribute_list = os.listdir("{}/{}".format(
                 self.modules_path, module))
 
             for attribute in attribute_list:
                 if not attribute.startswith("."):
-                    attribute_path = "{}/{}/{}".format( \
+                    attribute_path = "{}/{}/{}".format(
                         self.modules_path, self.modules_list[0], attribute)
                     return attribute_path
 
@@ -77,7 +75,8 @@ class RandomImageGenerator(object):
 
             module_path = "{}/{}".format(self.modules_path, module)
             module_list = sorted(os.listdir(module_path))
-            module_list = [module_title for module_title in module_list if not module_title.startswith(".")]
+            module_list = [module_title for module_title 
+            in module_list if not module_title.startswith(".")]
 
             for attribute in module_list:
                 attribute_image_path = "{}/{}".format(module_path, attribute)
@@ -97,15 +96,17 @@ class RandomImageGenerator(object):
             for _, attributes in images_paths.items():
                 attribute_rng = randrange(len(attributes))
                 with Image.open(attributes[attribute_rng]) as attribute_image:
-                    attribute_name += "{}_".format(self.image_name(attribute_image))
+                    attribute_name += "{}_".format(
+                        self.image_name(attribute_image))
 
                     attribute_image_h = attribute_image.height
                     attribute_image_w = attribute_image.width
 
-                    if attribute_image_h != self.height and attribute_image_w != self.width:
+                    if attribute_image_h != self.height \
+                    and attribute_image_w != self.width:
                         raise AssertionError("Height and/or width does not match \
                             {0} != {1} and/or {2} != {3}.".format(
-                                attribute_image_h, self.height, 
+                                attribute_image_h, self.height,
                                 attribute_image_w, self.width))
 
                     nft_image.paste(
@@ -113,7 +114,7 @@ class RandomImageGenerator(object):
                         (0, 0),
                         mask=attribute_image
                     )
-            nft_image_path = "{}/{}.png".format( \
+            nft_image_path = "{}/{}.png".format(
                 self.collection_output_path, attribute_name[:-1])
             nft_image.save(nft_image_path)
 
@@ -124,4 +125,3 @@ class RandomImageGenerator(object):
             os.makedirs(self.collection_output_path)
 
         self.layer_attributes(images_paths)
-
