@@ -19,8 +19,5 @@ setuptools.setup(
     ],
     packages=["nft"],
     python_requires=">=3.6",
-    install_requires=[
-        "Pillow==8.3.2",
-        "simplejson"
-    ],
+    install_requires=["Pillow==8.3.2", "simplejson"],
 )
