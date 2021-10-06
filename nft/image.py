@@ -7,7 +7,7 @@ import os
 
 class RandomImageGenerator(object):
     """
-    A class to generate a images based on parts specified by the user.
+    A class to generate a images based on modules specified by the user
 
     ...
     Attributes
@@ -33,6 +33,16 @@ class RandomImageGenerator(object):
     """
 
     def __init__(self, permutations, modules_path, collection_output_path):
+        """
+        Parameters
+        __________
+        permutations : int
+            Number of permutations to generate
+        modules_path : str
+            Path of the directory that contain the input modules
+        collection_output_path : str
+            Path of where to store the output images
+        """
         self.permutations = permutations
         self.collection_output_path = collection_output_path
 
@@ -47,11 +57,19 @@ class RandomImageGenerator(object):
         if len(self.modules_list) == 0:
             raise AssertionError("No modules")
 
-        # Find random image to determine dimensions
+        # Find first image to determine dimensions
         first_attribute_path = self.find_first_attribute()
         self.height, self.width = self.image_dimensions(first_attribute_path)
 
     def find_first_attribute(self):
+        """Finds the first attribute (image) in the directory containing the modules
+
+        Raises
+        __________
+        Exception
+            If no attributes/images are found
+        
+        """
         for module in self.modules_list:
             attribute_list = os.listdir("{}/{}".format(self.modules_path, module))
 
@@ -65,10 +83,31 @@ class RandomImageGenerator(object):
         raise Exception("No attributes found.")
 
     def image_dimensions(self, image_path):
+        """Returns the image dimensions
+        
+        Parameters
+        __________
+        image_path : str
+            File location of the image
+        
+        Returns
+        _______
+        tuple 
+            (int,int) tuple of (height, width)
+        """
         with Image.open(image_path) as im:
-            return im.height, im.width
+            return (im.height, im.width)
 
     def build_image_dict(self):
+        """Builds a dictionary of image paths and organizes the dictionary by collection
+
+        Each entry in the dictionary is categorized by the module. Each module is a list of attribute (image) paths
+
+        Returns
+        _______
+        OrderedDict
+            Dictionary of image paths
+        """
         images_paths = OrderedDict()
         for module in self.modules_list:
             images_paths.setdefault(module, [])
@@ -88,9 +127,36 @@ class RandomImageGenerator(object):
         return images_paths
 
     def image_name(self, image):
+        """Finds the filename of the image that is opened
+        
+        Parameters
+        __________
+        PIL.Image
+            Handle on the image that is opened
+        
+        Returns
+        _______
+        str
+            Image filename as a string
+        """
+
         return image.filename.split("/")[-1].split(".", 1)[0]
 
     def layer_attributes(self, images_paths):
+        """Goes through the number of permutations specified and creates images by layering the modules on top of each other
+
+        Each attribute is picked at random to use
+        
+        Parameters
+        __________
+        OrderedDict
+            Dictionary of all the image paths
+        
+        Raises
+        ______
+        AssertionError
+            If the height and/or width are not equal to the other images
+            """
         for _ in range(self.permutations + 1):
             canvas = (self.width, self.height)
             nft_image = Image.new("RGBA", canvas, (0, 0, 0, 0))
@@ -125,6 +191,10 @@ class RandomImageGenerator(object):
             nft_image.save(nft_image_path)
 
     def generate_collection(self):
+        """Generates the collection of images
+
+        First builds the dictionary of image paths and then layers the attributes to create the images for the number of permutations specified in the init
+        """
         images_paths = self.build_image_dict()
 
         if not os.path.exists(self.collection_output_path):
