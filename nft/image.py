@@ -68,7 +68,7 @@ class RandomImageGenerator(object):
         __________
         Exception
             If no attributes/images are found
-        
+
         """
         for module in self.modules_list:
             attribute_list = os.listdir("{}/{}".format(self.modules_path, module))
@@ -84,7 +84,7 @@ class RandomImageGenerator(object):
 
     def image_dimensions(self, image_path):
         """Returns the image dimensions
-        
+
         Parameters
         __________
         image_path : str
@@ -128,7 +128,7 @@ class RandomImageGenerator(object):
 
     def image_name(self, image):
         """Finds the filename of the image that is opened
-        
+
         Parameters
         __________
         PIL.Image
@@ -146,17 +146,17 @@ class RandomImageGenerator(object):
         """Goes through the number of permutations specified and creates images by layering the modules on top of each other
 
         Each attribute is picked at random to use
-        
+
         Parameters
         __________
         OrderedDict
             Dictionary of all the image paths
-        
+
         Raises
         ______
         AssertionError
             If the height and/or width are not equal to the other images
-            """
+        """
         for _ in range(self.permutations + 1):
             canvas = (self.width, self.height)
             nft_image = Image.new("RGBA", canvas, (0, 0, 0, 0))
