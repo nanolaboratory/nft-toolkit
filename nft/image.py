@@ -89,10 +89,10 @@ class RandomImageGenerator(object):
         __________
         image_path : str
             File location of the image
-        
+
         Returns
         _______
-        tuple 
+        tuple
             (int,int) tuple of (height, width)
         """
         with Image.open(image_path) as im:
@@ -133,7 +133,7 @@ class RandomImageGenerator(object):
         __________
         PIL.Image
             Handle on the image that is opened
-        
+
         Returns
         _______
         str
