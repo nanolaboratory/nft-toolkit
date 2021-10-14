@@ -25,6 +25,9 @@ pip install nft-toolkit
 
 ### Generate 100 Images:
 
+#### Steps
+1. 
+
 ```python
 from nft.image import RandomImageGenerator
 nft_collection = RandomImageGenerator(100, "./my-nft-project/nft_images", "./my-nft-project/collection")
