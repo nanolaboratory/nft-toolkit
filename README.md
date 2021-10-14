@@ -26,7 +26,9 @@ pip install nft-toolkit
 ### Generate 100 Images:
 
 #### Steps
-1. 
+1. Create a directory of attributes that you would like to layer on top of each other. Each attribute must be of the same image size so that the overlays will line up properly.
+
+2. Create a script similar to below. RandomImageGenerator uses 3 parameters: Number of permutations to generate, filepath to attributes, and filepath to place the images generated.
 
 ```python
 from nft.image import RandomImageGenerator
@@ -34,3 +36,8 @@ nft_collection = RandomImageGenerator(100, "./my-nft-project/nft_images", "./my-
 
 nft_collection.generate_collection()
 ```
+
+3. Your collection should be generated with each image's filename describing the attributes that are used.
+
+## Contribute
+Let us know what you think! If you would like new features please create issues 
