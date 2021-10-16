@@ -40,4 +40,4 @@ nft_collection.generate_collection()
 3. Your collection should be generated with each image's filename describing the attributes that are used.
 
 ## Contribute
-Let us know what you think! If you would like new features please create issues 
+Let us know what you think! If you would like new features please create issues so we can implement them.
