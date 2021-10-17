@@ -21,6 +21,14 @@ A tool to generate a randomized 2D-image NFT collection based on nft attribute l
 pip install nft-toolkit
 ```
 
+## Documentation
+To view documentation, after pip installation run the following commands in a python3 interactive shell.
+
+```python
+from nft.image import RandomImageGenerator
+help(RandomImageGenerator)
+```
+
 ## Examples
 
 ### Generate 100 Images:
