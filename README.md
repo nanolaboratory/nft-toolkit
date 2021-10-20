@@ -48,4 +48,4 @@ nft_collection.generate_collection()
 3. Your collection should be generated with each image's filename describing the attributes that are used.
 
 ## Contribute
-Let us know what you think! If you would like new features please create issues so we can implement them.
+Issues and pull requests are welcome. If you add functionality, then please add unit tests to cover it. Continuous Integration is handled by CircleCI.
