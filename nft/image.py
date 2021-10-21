@@ -157,7 +157,7 @@ class RandomImageGenerator(object):
         AssertionError
             If the height and/or width are not equal to the other images
         """
-        for _ in range(self.permutations + 1):
+        for _ in range(self.permutations):
             canvas = (self.width, self.height)
             nft_image = Image.new("RGBA", canvas, (0, 0, 0, 0))
 
