@@ -3,7 +3,7 @@ import setuptools
 
 setuptools.setup(
     name="nft-toolkit",
-    version="0.1.0",
+    version="0.1.1",
     author="Nano Labs LLC",
     author_email="hello@nanolabs.dev",
     description="A tool to generate a randomized 2D-image \
