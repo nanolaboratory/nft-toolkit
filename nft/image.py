@@ -184,7 +184,11 @@ class RandomImageGenerator(object):
                             )
                         )
 
-                    nft_image.paste(attribute_image, (0, 0), mask=attribute_image)
+                    nft_image.paste(
+                        attribute_image.convert("RGBA"),
+                        (0, 0),
+                        mask=attribute_image.convert("RGBA"),
+                    )
             nft_image_path = "{}/{}.png".format(
                 self.collection_output_path, attribute_name[:-1]
             )
